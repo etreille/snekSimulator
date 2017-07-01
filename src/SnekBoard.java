@@ -1,4 +1,10 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -48,18 +54,71 @@ public class SnekBoard extends JPanel implements ActionListener {
     private Image apple;
     private Image head;
     
+
+	public SnekBoard (){
+
+        addKeyListener(new TAdapter());
+        setBackground(Color.black);
+        setFocusable(true);
+
+        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        loadImages();
+        initGame();
+    }
+    
+	@Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        doDrawing(g);
+    }
+	
+private void doDrawing(Graphics g) {
+        
+        if (inGame) {
+
+            g.drawImage(apple, appleX, appleY, this);
+
+            for (int z = 0; z < dots; z++) {
+                if (z == 0) {
+                    g.drawImage(head, snekX[z], snekY[z], this);
+                } else {
+                    g.drawImage(ball, snekX[z], snekY[z], this);
+                }
+            }
+
+            Toolkit.getDefaultToolkit().sync();
+
+        } else {
+
+            gameOver(g);
+        }        
+    }
+
+	private void gameOver(Graphics g) {
+	    
+	    String msg = "Game Over";
+		Font small = new Font("Helvetica", Font.BOLD, 14);
+	    FontMetrics metr = getFontMetrics(small);
+	
+	    g.setColor(Color.white);
+	    g.setFont(small);
+	    g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+	}
+
+	
     //get the images
 	private void loadImages(){
-		ImageIcon imageIDot = new ImageIcon("dot.png");
+		ImageIcon imageIDot = new ImageIcon("Images/dot.png");
 		ball = imageIDot.getImage();
 		
-		ImageIcon imageIApple = new ImageIcon("apple.png");
+		ImageIcon imageIApple = new ImageIcon("Images/apple.png");
 		apple = imageIApple.getImage();
 		
-		ImageIcon imageIHead = new ImageIcon("head.png");
+		ImageIcon imageIHead = new ImageIcon("Images/head.png");
 		head = imageIHead.getImage();
 	}
-	
+		
 	private void initGame(){
 		//snek is 3 dots long
 		dots = 3;
