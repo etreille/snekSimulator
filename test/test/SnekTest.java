@@ -34,6 +34,15 @@ public class SnekTest {
 		snekBehavior.positionSnek(200,150);
 		assertEquals(snekBehavior.isStillInBoard(300, 300), true);
 	}
+
+	@Test
+	public void ShouldBiteItself() {
+		snekBehavior.positionSnek(150,150);
+		assertEquals(snekBehavior.snekBitesItself(), false);
+		snekBehavior.positionSnek(150,150);
+		snekBehavior.getSnekX()[0] = 90;
+		assertEquals(snekBehavior.snekBitesItself(), true);
+	}
 	
 	
 
