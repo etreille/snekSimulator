@@ -1,22 +1,18 @@
 package snekpackage;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 public class SnekBehavior {
 
 	private final int ALL_DOTS = 900;
 
 	private int dots = 10;
-	
+
 	// Snek and food size
 	private final int DOT_SIZE = 10;
-	
+
 	// Stores coordinates of snek
 	private final int snekX[] = new int[ALL_DOTS];
 	private final int snekY[] = new int[ALL_DOTS];
-	
+
 	public int[] getSnekX() {
 		return snekX;
 	}
@@ -40,8 +36,7 @@ public class SnekBehavior {
 			snekY[z] = headY;
 		}
 	}
-	
-	
+
 	public boolean isEating(int appleX, int appleY) {
 		if ((snekX[0] == appleX) && (snekY[0] == appleY)) {
 			// snek grows after eating food
@@ -52,7 +47,7 @@ public class SnekBehavior {
 		}
 		return false;
 	}
-	
+
 	public void move(boolean leftDirection, boolean rightDirection, boolean upDirection, boolean downDirection) {
 		for (int z = dots; z > 0; z--) {
 			snekX[z] = snekX[z - 1];
@@ -94,8 +89,8 @@ public class SnekBehavior {
 		}
 		return true;
 	}
-	
-	public boolean snekBitesItself(){
+
+	public boolean snekBitesItself() {
 		// checking if snek bites itself
 		for (int z = dots; z > 0; z--) {
 			if ((z > 4) && (snekX[0] == snekX[z]) && (snekY[0] == snekY[z])) {

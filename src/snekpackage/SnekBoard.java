@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class SnekBoard extends JPanel implements ActionListener {
 
 	// Size of the board
@@ -37,6 +38,7 @@ public class SnekBoard extends JPanel implements ActionListener {
 	ImageIcon imageIDot;
 	ImageIcon imageIApple;
 	ImageIcon imageIHead;
+	private int score = 0;
 
 	// Moves
 	private boolean leftDirection = false;
@@ -102,6 +104,13 @@ public class SnekBoard extends JPanel implements ActionListener {
 	private void doDrawing(Graphics g) {
 
 		if (isInGame() && !bitItself ) {
+			String msg = ""+score;
+			Font small = new Font("Helvetica", Font.BOLD, 14);
+			FontMetrics metr = getFontMetrics(small);
+
+			g.setColor(Color.white);
+			g.setFont(small);
+			g.drawString(msg, 10, 20);
 
 			g.drawImage(apple, foodBehav.getAppleX(), foodBehav.getAppleY(), this);
 
@@ -121,12 +130,14 @@ public class SnekBoard extends JPanel implements ActionListener {
 	private void gameOver(Graphics g) {
 
 		String msg = "Game Over";
+		String msg2 = "Final Score : "+score;
 		Font small = new Font("Helvetica", Font.BOLD, 14);
 		FontMetrics metr = getFontMetrics(small);
 
 		g.setColor(Color.white);
 		g.setFont(small);
-		g.drawString(msg, (getB_WIDTH() - metr.stringWidth(msg)) / 2, getB_HEIGHT() / 2);
+		g.drawString(msg, (getB_WIDTH() - metr.stringWidth(msg)) / 2, getB_HEIGHT() / 2 - 14);
+		g.drawString(msg2, (getB_WIDTH() - metr.stringWidth(msg2)) / 2, getB_HEIGHT() / 2 + 14);
 	}
 
 	// get the images
@@ -140,7 +151,7 @@ public class SnekBoard extends JPanel implements ActionListener {
 		imageIHead = new ImageIcon("src/snekpackage/Images/head.png");
 		head = imageIHead.getImage();
 	}
-
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -148,6 +159,7 @@ public class SnekBoard extends JPanel implements ActionListener {
 			boolean ate = snekBehav.isEating(foodBehav.getAppleX(), foodBehav.getAppleY());
 			if (ate){
 				foodBehav.locateApple();
+				score+=10;
 			}
 			inGame = snekBehav.isStillInBoard( B_HEIGHT, B_WIDTH);
 			bitItself = snekBehav.snekBitesItself();
