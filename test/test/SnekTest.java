@@ -44,6 +44,12 @@ public class SnekTest {
 		assertEquals(snekBehavior.snekBitesItself(), true);
 	}
 	
-	
+	@Test
+	public void ShouldEat() {
+		snekBehavior.positionSnek(160,160);
+		assertEquals(snekBehavior.isEating(160, 160), true);
+		snekBehavior.positionSnek(160,160);
+		assertEquals(snekBehavior.isEating(200, 200), false);
+	}
 
 }
