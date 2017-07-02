@@ -81,6 +81,16 @@ public class SnekBoard extends JPanel implements ActionListener {
 	public int getB_HEIGHT() {
 		return B_HEIGHT;
 	}
+	
+	private void initGame() {
+		snekBehav.positionSnek(snekStartX, snekStartY);
+		// randomly placing food
+		foodBehav.locateApple();
+
+		// starting the timer
+		timer = new Timer(DELAY, this);
+		timer.start();
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -131,15 +141,6 @@ public class SnekBoard extends JPanel implements ActionListener {
 		head = imageIHead.getImage();
 	}
 
-	private void initGame() {
-		snekBehav.positionSnek(snekStartX, snekStartY);
-		// randomly placing food
-		foodBehav.locateApple();
-
-		// starting the timer
-		timer = new Timer(DELAY, this);
-		timer.start();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
