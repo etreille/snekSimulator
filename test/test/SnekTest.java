@@ -51,5 +51,7 @@ public class SnekTest {
 		snekBehavior.positionSnek(160,160);
 		assertEquals(snekBehavior.isEating(200, 200), false);
 	}
+	
+	
 
 }

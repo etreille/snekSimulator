@@ -41,13 +41,6 @@ public class SnekBehavior {
 		}
 	}
 	
-	public void positionSnek() {
-		// placing snek
-		for (int z = 0; z < dots; z++) {
-			snekX[z] = 150 - z * 10;
-			snekY[z] = 150;
-		}
-	}
 	
 	public boolean isEating(int appleX, int appleY) {
 		if ((snekX[0] == appleX) && (snekY[0] == appleY)) {
@@ -81,30 +74,6 @@ public class SnekBehavior {
 
 		if (downDirection) {
 			snekY[0] += DOT_SIZE;
-		}
-	}
-
-	
-	public void moveTowardApple(int appleX, int appleY) {
-		try {
-			Robot robot = new Robot();
-
-			if (snekX[0] < appleX) {
-				// GO TO RIGHT
-				robot.keyPress(KeyEvent.VK_RIGHT);
-			} else if (snekX[0] > appleX) {
-				// GO TO LEFT
-				robot.keyPress(KeyEvent.VK_LEFT);
-			} else {
-				if (snekY[0] < appleY) {
-					// GO DOWN
-					robot.keyPress(KeyEvent.VK_DOWN);
-				} else if (snekY[0] > appleY) {
-					robot.keyPress(KeyEvent.VK_UP);
-				}
-			}
-		} catch (AWTException e) {
-			e.printStackTrace();
 		}
 	}
 

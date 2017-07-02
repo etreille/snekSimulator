@@ -27,6 +27,9 @@ public class SnekBoard extends JPanel implements ActionListener {
 	FoodBehavior foodBehav = new FoodBehavior();
 	SnekBehavior snekBehav = new SnekBehavior();
 
+	private int snekStartX = 150;
+	private int snekStartY = 150;
+	
 	// images
 	private Image ball;
 	private Image apple;
@@ -129,7 +132,7 @@ public class SnekBoard extends JPanel implements ActionListener {
 	}
 
 	private void initGame() {
-		snekBehav.positionSnek();
+		snekBehav.positionSnek(snekStartX, snekStartY);
 		// randomly placing food
 		foodBehav.locateApple();
 
