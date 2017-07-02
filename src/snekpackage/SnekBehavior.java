@@ -4,8 +4,6 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
-import javax.swing.Timer;
-
 public class SnekBehavior {
 
 	private final int ALL_DOTS = 900;
